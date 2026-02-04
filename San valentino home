@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentino per il mio amore</title>
+    <link rel="stylesheet" href="Sanvalentinositoprova.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Felice Quarto anniversario mio amore 💖</h2>
+
+        <img src="Foto5.png" alt="Cuore romantico">
+
+        <div id="pregunta1">
+            <p>Inserisci la data di inizio della nostra relazione</p>
+            <input type="date" id="fechaInicio"><br><br>
+            <button onclick="validarFecha()">Verifica</button>
+        </div>
+
+        <div id="pregunta2" class="hidden">
+            <p>Qual è il tuo soprannome?</p>
+            <input type="text" id="apodo" placeholder="ciao amore"><br><br>
+            <button onclick="validarApodo()">Verifica</button>
+        </div>
+
+        <div id="pregunta3" class="hidden">
+            <p>Quando ci siamo dati il nostro primo bacio?</p>
+            <input type="date" id="primerBeso"><br><br>
+            <button onclick="validarBeso()">Verifica</button>
+        </div>
+
+        <p id="mensaje" class="hidden">
+            Congratulazioni, mio bellissimo amore 💖
+        </p>
+
+        <div id="carta" class="hidden">
+            <h3>Ciao Amore mio,</h3>
+            <p id="mensajeCarta">
+               Buon primo San Valentino, tesoro mio.
+Ti adoro tantissimo, amore mio 💖
+
+Sei davvero un ragazzo fantastico e voglio solo ricordarti quanto sei importante per me.
+Non ci sono parole sufficienti per descrivere quanto ti amo e quanto sono grata di averti nella mia vita.
+Non avrei mai pensato di incontrare qualcuno di così speciale come te.
+
+Sei la persona che illumina i miei giorni più bui,
+che mi fa ridere quando ne ho più bisogno
+e che, semplicemente stando al mio fianco, rende tutto migliore.
+
+Ogni momento con te è un dono, ogni tua parola è un abbraccio per la mia anima.
+Oggi, a San Valentino, voglio prometterti che cercherò sempre di esserci per te,
+sostenendoti, amandoti e apprezzandoti come meriti.
+
+Ti amo così tanto, amore mio,
+e spero di continuare a vivere momenti meravigliosi con te 💕
+            </p>
+        </div>
+
+        <h3>Galleria dei ricordi</h3>
+        <div id="galeria">
+            <img src="Foto3.png" alt="foto di coppia">
+            <img src="Foto4.png" alt="foto di coppia">
+            <img src="Foto1.png" alt="foto di coppia">
+        </div>
+
+        <h3>Conto alla rovescia per il nostro 4° anniversario</h3>
+        <p id="countdown"></p>
+    </div>
+
+    <!-- LIBRERIA CONFETTI -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.1/dist/confetti.browser.min.js"></script>
+
+    <!-- JAVASCRIPT DIRETTAMENTE NELL’HTML -->
+    <script>
+    function validarFecha() {
+        const fechaInicio = document.getElementById("fechaInicio").value;
+        const fechaCorrecta = "2022-05-23";
+
+        if (fechaInicio === fechaCorrecta) {
+            document.getElementById("pregunta1").classList.add("hidden");
+            document.getElementById("pregunta2").classList.remove("hidden");
+        } else {
+            alert("Ritenta amore mio 💕");
+        }
+    }
+
+    function validarApodo() {
+        const apodo = document.getElementById("apodo").value.trim().toLowerCase();
+        const apodoCorrecto = "patatina";
+
+        if (apodo === apodoCorrecto) {
+            document.getElementById("pregunta2").classList.add("hidden");
+            document.getElementById("pregunta3").classList.remove("hidden");
+        } else {
+            alert("Ritenta amore mio 💕");
+        }
+    }
+
+    function lanzarConfeti() {
+        confetti({
+            particleCount: 120,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
+    }
+
+    function validarBeso() {
+        const primerBeso = document.getElementById("primerBeso").value;
+        const besoCorrecto = "2022-05-23";
+
+        if (primerBeso === besoCorrecto) {
+            document.getElementById("pregunta3").classList.add("hidden");
+            document.getElementById("mensaje").classList.remove("hidden");
+            document.getElementById("carta").classList.remove("hidden");
+            lanzarConfeti();
+        } else {
+            alert("Ritenta amore mio 💕");
+        }
+    }
+
+    function actualizarCuentaRegresiva() {
+        const fechaAniversario = new Date("2026-05-23").getTime();
+
+        setInterval(() => {
+            const ahora = new Date().getTime();
+            const diferencia = fechaAniversario - ahora;
+
+            if (diferencia < 0) {
+                document.getElementById("countdown").innerHTML =
+                    "Felice anniversario amore mio 🎉💖";
+                return;
+            }
+
+            const giorni = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const ore = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minuti = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const secondi = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `${giorni}d ${ore}h ${minuti}m ${secondi}s`;
+        }, 1000);
+    }
+
+    actualizarCuentaRegresiva();
+    </script>
+
+</body>
+</html>
+
